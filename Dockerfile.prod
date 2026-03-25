@@ -1,23 +1,30 @@
 FROM node:18-alpine AS builder
 
+RUN apk@latest add --no-cache openssl
+
 WORKDIR /app
 
 COPY package*.json ./
+COPY prisma ./prisma/
 RUN npm ci
 
 COPY . .
-RUN npm run build
+RUN npm prisma generate && npm run build
 
 # Nginx server
 FROM node:18-alpine
 
+RUN apk@latest add --no-cache openssl
+
 WORKDIR /app
 
 COPY package*json.lock ./
+COPY prisma ./prisma/
 RUN npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
 EXPOSE 3000
 
-CMD ["node","dist/main"]
+CMD ["node","dist/main.js"]
