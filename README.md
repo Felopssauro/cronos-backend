@@ -1,7 +1,7 @@
-# SCA UEPA (Backend) - Sistema Cronos de Alocação
+# SCA UEPA - Backend
 
 <!--toc:start-->
-- [SCA UEPA (Backend) - Sistema Cronos de Alocação](#sca-uepa-backend-sistema-cronos-de-alocação)
+- [SCA UEPA - Backend](#sca-uepa-backend)
   - [Description](#description)
   - [Dependencies](#dependencies)
   - [Tools](#tools)
@@ -43,8 +43,6 @@ To run this project it is recommend you have the following dependencies installe
 - Provide environment variables inside a .env file for Docker Compose:
   - `DATABASE_URL`: set this to the link of a Neon Database Server.
   - `JWT_SECRET`
-  - You can also write a `COMPOSE_FILE` variable with the name of the docker compose file you will be using the most, so you don't have to manually pass the `-f` flag every time.
-    - e.g: `COMPOSE_FILE=docker-compose.dev.yml`
   - Build the containers with docker compose:
     - For development:
       - `docker compose up --build -d`
